@@ -1,0 +1,38 @@
+---
+spring:
+    application:
+        name: gateway
+
+server:
+    port: 8080
+ 
+zuul:
+    routes:
+        book-service:
+            path: /book-service/**
+            sensitiveHeaders: Cookie,Set-Cookie,Authorization
+        rating-service:
+            path: /rating-service/**
+            sensitiveHeaders: Cookie,Set-Cookie,Authorization
+        discovery:
+            path: /discovery/**
+            sensitiveHeaders: Cookie,Set-Cookie,Authorization
+            url: http://discovery:8082
+   
+hystrix:
+    command:
+       book-service:
+           execution:
+               isolation:
+                   thread:
+                       timeoutInMilliseconds: 600000 
+       rating-service:
+           execution:
+               isolation:
+                   thread:
+                       timeoutInMilliseconds: 600000
+       discovery:
+           execution:
+               isolation:
+                   thread:
+                       timeoutInMilliseconds: 600000

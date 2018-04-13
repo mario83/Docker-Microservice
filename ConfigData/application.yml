@@ -2,5 +2,7 @@
 # Items that apply to ALL profiles:
 eureka:
   client:
+    region: default
+    registryFetchIntervalSeconds: 5
     serviceUrl:
        defaultZone: http://discovery:8082/eureka/
